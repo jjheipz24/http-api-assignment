@@ -12,7 +12,6 @@
         const handleResponse = (xhr) => {
     const content = document.querySelector("#content");
 
-    const obj = JSON.parse(xhr.response);
 
     switch(xhr.status) {
         case 200: //success
@@ -40,18 +39,35 @@
           content.innerHTML = `Error code not implemented by client.`;
           break;
 }
-    if(obj.message) {
-        content.innerHTML += '<p>Message: ' + obj.message + '</p>'
-      }
+            
+            if(xhr.getResponseHeader('content-type') === 'text/xml'){
+            console.dir(xhr.responseXML);
+               const message = xhr.responseXML.querySelector('message').textContent;
+            content.innerHTML += `<p>${message}</p>`;
+            if(xhr.responseXML.querySelector('id')){
+                const id = xhr.responseXML.querySelector('id').textContent;
+                content.innerHTML += `<p>${id}</p>`;
+            }
+          
+            }else{
+                const obj = JSON.parse(xhr.response);
+                    if(obj.message) {
+                        content.innerHTML += `<p>Message: ${obj.message}</p>`;
+                    }
+                    console.dir(obj);
+               }
+
 };
 
 const sendAjax = (url) => {
 
       const xhr = new XMLHttpRequest();
+    const type = document.querySelector('#type');
+    let typeSelected = type.options[type.selectedIndex].value;
 
       xhr.open('GET', url);
 
-      xhr.setRequestHeader ("Accept", 'application/json');
+      xhr.setRequestHeader ("Accept", typeSelected);
 
       xhr.onload = () => handleResponse(xhr);
 
