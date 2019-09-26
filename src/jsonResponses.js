@@ -28,7 +28,7 @@ const success = (request, response, acceptedTypes) => {
     message: 'This is a successful response',
   };
   console.log('here');
-  respond(request, response, 200, responseJSON, acceptedTypes);
+  respond(request, response, 200, responseJSON, acceptedTypes[0]);
   console.log(respond);
 };
 
@@ -41,10 +41,10 @@ const badRequest = (request, response, acceptedTypes, params) => {
     responseJSON.message = 'Missing valid query parameter set to true';
     responseJSON.id = 'badRequest';
 
-    respond(request, response, 400, responseJSON, acceptedTypes);
+    respond(request, response, 400, responseJSON, acceptedTypes[0]);
     console.log(respond);
   } else {
-    respond(request, response, 200, responseJSON, acceptedTypes);
+    respond(request, response, 200, responseJSON, acceptedTypes[0]);
     console.log(respond);
   }
 };
@@ -58,10 +58,10 @@ const unauthorized = (request, response, acceptedTypes, params) => {
     responseJSON.message = 'Missing valid query parameter set to true';
     responseJSON.id = 'unauthorized';
 
-    respond(request, response, 401, responseJSON, acceptedTypes);
+    respond(request, response, 401, responseJSON, acceptedTypes[0]);
     console.log(respond);
   } else {
-    respond(request, response, 200, responseJSON, acceptedTypes);
+    respond(request, response, 200, responseJSON, acceptedTypes[0]);
     console.log(respond);
   }
 };
@@ -72,7 +72,7 @@ const forbidden = (request, response, acceptedTypes) => {
     message: 'You do not have access to this content.',
   };
 
-  respond(request, response, 403, responseJSON, acceptedTypes);
+  respond(request, response, 403, responseJSON, acceptedTypes[0]);
   console.log(respond);
 };
 
@@ -82,7 +82,7 @@ const internal = (request, response, acceptedTypes) => {
     message: 'Internal Server Error. Something went wrong.',
   };
 
-  respond(request, response, 500, responseJSON, acceptedTypes);
+  respond(request, response, 500, responseJSON, acceptedTypes[0]);
   console.log(respond);
 };
 
@@ -92,7 +92,7 @@ const notImplemented = (request, response, acceptedTypes) => {
     message: 'A get request for this page has not been implemented yet. Check again later for updated content',
   };
 
-  respond(request, response, 501, responseJSON, acceptedTypes);
+  respond(request, response, 501, responseJSON, acceptedTypes[0]);
   console.log(respond);
 };
 
@@ -102,7 +102,7 @@ const notFound = (request, response, acceptedTypes) => {
     message: 'The page you are looking for was not found.',
   };
 
-  respond(request, response, 404, responseJSON, acceptedTypes);
+  respond(request, response, 404, responseJSON, acceptedTypes[0]);
   console.log(respond);
 };
 

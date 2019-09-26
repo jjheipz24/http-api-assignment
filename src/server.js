@@ -21,6 +21,13 @@ const urlStruct = {
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
   const acceptedTypes = request.headers.accept.split(',');
+  // console.log("AcceptedTypes is " + acceptedTypes);
+  // Notes to myself:
+  // takes request (if you set 'success' and hit enter, 'success' is the request)
+  // whole array of accepted types split at just the accepted one
+  // accepted type is still in an array
+  // need to grab that item using acceptedTypes[0] though
+
   const params = query.parse(parsedUrl.query);
 
   if (urlStruct[parsedUrl.pathname]) {
